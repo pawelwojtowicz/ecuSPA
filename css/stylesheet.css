@@ -1,0 +1,58 @@
+body {
+    background-color: #d0e4fe;
+}
+
+h1 {
+    color: orange;
+    text-align: center;
+}
+
+header
+{
+align-self: center;
+width: 90%;
+border-style: solid;
+height: 75px;
+}
+
+footer
+{
+align-self: center;
+width: 90%;
+border-style: solid;
+}
+
+.zawartosc
+{
+width: 90%;
+height: 400px;
+border-style: solid;
+align-self: center;
+}
+
+
+.header-button
+{
+float:left; 
+width:31%;
+height: 50px;
+text-align: center;
+background-color: green;
+border-style: solid;
+border-width: medium;
+border-radius: 10px;
+margin: 10px;
+}
+
+.header-button:hover
+{
+float:left; 
+width:31%;
+height: 50px;
+text-align: center;
+background-color: red;
+border-style: double;
+border-width: medium;
+border-radius: 10px;
+margin: 10px;
+}

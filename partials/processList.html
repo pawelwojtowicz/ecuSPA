@@ -1,0 +1,6 @@
+<div ng-controller="processListCtrl as ctrl">
+<table border="1" style="width:100%">
+<tr><td>ID</td><td>Name</td><td>VersionInfo</td><td>Status</td></tr>
+<tr ng-repeat="processInfo in ctrl.processes"><td>{{processInfo.processId}}</td><td>{{processInfo.name}}</td><td>{{processInfo.versionInfo}}</td><td>{{processInfo.unitState}}</td></tr>
+</table>
+<div>

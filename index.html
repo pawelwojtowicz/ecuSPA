@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="maintenanceApp">
+<head>
+	<meta charset="utf-8">
+	<title>Google Phone Gallery</title>
+	<link href="css/stylesheet.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="3rdParty/angular.js"></script>
+	<script type="text/javascript" src="3rdParty/angular-route.js"></script>
+	<script type="text/javascript" src="js/controllers.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+</head>
+<body>
+<h1 >This is nice</h1>
+<header ng-controller="screenFlowCtrl">
+<div class="header-button" ng-click="changeScreen('processes')" >Processes</div><div class="header-button" ng-click="changeScreen('meminfo')">MemInfo</div><div class="header-button" ng-click="changeScreen('deviceControl')">Control</div>
+</header>
+</br>
+
+<div class="zawartosc" ng-view></div>
+</br>
+<footer>
+Mapa TUGERSAN
+</footer>
+</body>
+</html> 

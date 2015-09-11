@@ -31,8 +31,16 @@ maintenanceControllers.controller('meminfoCtrl', function( $scope, $http)
 		});
 	});
 	
-maintenanceControllers.controller('screenFlowCtrl', function($scope, $routeParams, $location){
-    $scope.changeScreen = function(viewName){
+maintenanceControllers.controller('screenFlowCtrl', function($scope, $routeParams, $location)
+	{
+    $scope.changeScreen = function(viewName)
+		{
         $location.url('/'+viewName);
-    };
-});
+		};
+	});
+
+maintenanceControllers.controller('statusUpdater', function($scope, $interval)
+	{
+		$scope.number = 5;
+		$interval( function() { $scope.number++; }, 1000 );
+	});

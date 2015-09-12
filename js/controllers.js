@@ -39,8 +39,21 @@ maintenanceControllers.controller('screenFlowCtrl', function($scope, $routeParam
 		};
 	});
 
-maintenanceControllers.controller('statusUpdater', function($scope, $interval)
+maintenanceControllers.controller('statusUpdater', function($scope, $interval, $http)
 	{
 		$scope.number = 5;
-		$interval( function() { $scope.number++; }, 1000 );
+		$scope.statusText = 'no connection';
+		$scope.footerStyleClass = 'ok';
+		$interval( function() 	{ 
+									$scope.number++; 
+									$http.get('index.html').success(function(responseData)
+									{
+										$scope.statusText = "connection OK";
+										$scope.footerStyleClass = "ok";
+									}).error(function(data, status, headers, config)
+									{ 
+										$scope.statusText = "connection FAILURE";
+										$scope.footerStyleClass = "nok";
+									});
+								}, 5000 );
 	});

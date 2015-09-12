@@ -62,3 +62,13 @@ background-color: red;
 {
 background-color: white;
 }
+
+footer.ok
+{
+background-color: green;
+}
+
+footer.nok
+{
+background-color: red;
+}

@@ -18,8 +18,8 @@
 
 <div class="zawartosc" ng-view></div>
 </br>
-<footer ng-controller="statusUpdater">
-Healthcheck status: offline - after {{number}} seconds
+<footer ng-controller="statusUpdater" ng-class="footerStyleClass">
+Healthcheck status: {{statusText}} - after {{number}} seconds
 </footer>
 </body>
 </html> 

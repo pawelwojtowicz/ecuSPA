@@ -1,18 +1,12 @@
 <div ng-controller="netControl as ctrl">
+<table><tr><td>Network configuration mode:</td><td>
 <select ng-model="networkConfigurationMode">
-	<option value="auto">DHCP</option>
-	<option value="manual">Static</option>
-</select>
-{{networkConfigurationMode}}
-{{isStatic()}}
-</br>
-<div ng-show="isStatic()">
-IP Address:<input type="text" ng-model="ipAddress" placeholder="ip address"></input></br>
-Mask:<input type="text" ng-model="mask" placeholder="mask"></input></br>
-Gateway:<input type="text" ng-model="gateway" placeholder="gateway"></input></br>
-</div>
-</br>
-<button ng-click="applySettings()">Apply settings</button>
-</br>
-{{message}}
+<option value="auto">DHCP</option>
+<option value="manual">Static</option>
+</select></td></tr>
+<tr ng-show="isStatic()"><td class="mainTableRight">IP Address:</td><td><input type="text" ng-model="ipAddress" placeholder="ip address"></input></td></tr>
+<tr ng-show="isStatic()"><td class="mainTableRight">Mask:</td><td><input type="text" ng-model="mask" placeholder="mask"></input></td></tr>
+<tr ng-show="isStatic()"><td class="mainTableRight">Gateway:</td><td><input type="text" ng-model="gateway" placeholder="gateway"></input></td></tr>
+<tr><td colspan="2" class="mainTableCenter"><button ng-click="saveSettings()">Save settings</button></td><tr>
+</table>
 </div>

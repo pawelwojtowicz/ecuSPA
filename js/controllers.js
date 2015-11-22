@@ -69,8 +69,41 @@ maintenanceControllers.controller('netControl', function($scope, $interval, $htt
 		{
 			return ( $scope.networkConfigurationMode == 'manual');
 		};
-		$scope.applySettings = function() 
+		$scope.saveSettings = function() 
 		{
 			$scope.message = "Setting up the IPs to "+$scope.ipAddress; 
+		};
+	});
+	
+	
+maintenanceControllers.controller('deviceCtrl', function($scope, $interval, $http)
+	{
+		$scope.requestStatus='';
+		$scope.restartApplication = function()
+		{
+			$scope.invokeCommand('restartApplication');
+		};
+		$scope.restartDevice = function()
+		{
+			$scope.invokeCommand('restartDevice');
+		};
+		$scope.deactivateWatchdog = function()
+		{
+			$scope.invokeCommand('deactivateWatchdog');
+		};
+		$scope.invokeCommand = function( commandName)
+		{
+			var commandUrl = 'cgi-bin/controller?command_name=controller&api_name='+commandName;
+			$http.get(commandUrl).success(function(responseData)
+			{
+				var status = responseData.operationData.data;
+				if ( 'ok' == status)
+				{
+					$scope.requestStatus = 'ok';
+				}
+			}).error(function(data, status, headers, config)
+			{ 
+				$scope.requestStatus = "Request failure";
+			});
 		};
 	});

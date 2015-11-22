@@ -1,5 +1,7 @@
-<form action="cgi-bin/controller" method="post">
-  <input type="hidden" name="command_name" value="controller"/>
-  <input type="submit" name="api_name" value="shutdown"/></br></br>
-  <input type="submit" name="api_name" value="restart"/></br></br>
-</form>
+<div ng-controller="deviceCtrl as ctrl">
+<table>
+<tr><td class="mainTableLeft">Shutdown the application, and restart the device, considering the background tasks</td><td class="mainTableLeft">Shutdown device - restart the device, without considering the application state. Background tasks will be ignored</td><td class="mainTableLeft">Deactivate Watchdog - disable the watchdog. The RPI will not restart itself, without the ECU App running.</td></tr>
+<tr><td class="mainTableCenter"><button ng-click="restartApplication()" >RestartApplication</button></td><td class="mainTableCenter"><button ng-click="restartDevice()">RestartDevice</button></td><td class="mainTableCenter"><button ng-click="deactivateWatchdog()">Deactivate Watchdog</button></td></tr>
+<tr><td colspan="3" class="mainTableCenter">{{requestStatus}}</td></tr>
+</table>
+</div>

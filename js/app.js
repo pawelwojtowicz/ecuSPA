@@ -20,7 +20,7 @@ maintenancePage.config(['$routeProvider',
       }).
 	  when('/deviceControl', {
         templateUrl: 'partials/deviceControl.html',
-        controller: ''
+        controller: 'deviceCtrl'
 	  }).
 	  when('/networkSettings', {
         templateUrl: 'partials/networkSettings.html',

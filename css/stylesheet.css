@@ -72,3 +72,24 @@ footer.nok
 {
 background-color: red;
 }
+
+.mainTableLeft
+{
+padding: 2%;
+}
+
+.mainTableCenter
+{
+text-align: center;
+padding: 2%;
+}
+
+.mainTableLeft
+{
+padding: 2%;
+}
+
+.mainTableRight
+{
+text-align: right;
+}

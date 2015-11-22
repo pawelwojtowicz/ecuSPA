@@ -57,3 +57,20 @@ maintenanceControllers.controller('statusUpdater', function($scope, $interval, $
 									});
 								}, 5000 );
 	});
+
+maintenanceControllers.controller('netControl', function($scope, $interval, $http)
+	{
+		$scope.networkConfigurationMode = 'auto';
+		$scope.message = '-';
+		$scope.ipAddress = '192.168.10.1';
+		$scope.mask = '255.255.255.0';
+		$scope.gateway = '192.168.10.100';
+		$scope.isStatic = function()
+		{
+			return ( $scope.networkConfigurationMode == 'manual');
+		};
+		$scope.applySettings = function() 
+		{
+			$scope.message = "Setting up the IPs to "+$scope.ipAddress; 
+		};
+	});

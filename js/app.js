@@ -22,6 +22,10 @@ maintenancePage.config(['$routeProvider',
         templateUrl: 'partials/deviceControl.html',
         controller: ''
 	  }).
+	  when('/networkSettings', {
+        templateUrl: 'partials/networkSettings.html',
+        controller: 'netControl'
+	  }).
       otherwise({
         redirectTo: '/meminfo'
       });

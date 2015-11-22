@@ -12,8 +12,10 @@
 <body>
 <h1>RPI Maintenance page</h1>
 <header ng-controller="screenFlowCtrl">
-<div class="header-button" ng-click="changeScreen('processes')" >Processes</div><div class="header-button" ng-click="changeScreen('meminfo')">MemInfo</div><div class="header-button" ng-click="changeScreen('deviceControl')">Control</div>
-</header>
+<div class="header-button" ng-click="changeScreen('processes')" >Processes</div>
+<div class="header-button" ng-click="changeScreen('meminfo')">MemInfo</div>
+<div class="header-button" ng-click="changeScreen('deviceControl')">Control</div>
+<div class="header-button" ng-click="changeScreen('networkSettings')" >Network</div></header>
 </br>
 
 <div class="zawartosc" ng-view></div>

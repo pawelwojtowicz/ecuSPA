@@ -1,3 +1,4 @@
+(function () {
 'use strict';
 
 /* App Module */
@@ -30,3 +31,4 @@ maintenancePage.config(['$routeProvider',
         redirectTo: '/meminfo'
       });
   }]);
+}());

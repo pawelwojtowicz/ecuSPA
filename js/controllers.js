@@ -1,3 +1,4 @@
+(function () {
 'use strict';
 
 var maintenanceControllers = angular.module('maintenanceControllers', []);
@@ -18,7 +19,7 @@ maintenanceControllers.controller('meminfoCtrl', function( $scope, $http)
 		$http.get('cgi-bin/controller?command_name=getMemInfo').success(function(responseData)
 		{
 			$scope.ctrl.memtotal 	= responseData.getMemInfo.data.meminfo.MemTotal;
-			$scope.ctrl.memfree 	= responseData.getMemInfo.data.meminfo.MemFree,
+			$scope.ctrl.memfree 	= responseData.getMemInfo.data.meminfo.MemFree;
 			$scope.ctrl.buffers 	= responseData.getMemInfo.data.meminfo.Buffers;
 			$scope.ctrl.cached	 	= responseData.getMemInfo.data.meminfo.Cached;
 			$scope.ctrl.swapcached= responseData.getMemInfo.data.meminfo.SwapCached;
@@ -107,3 +108,4 @@ maintenanceControllers.controller('deviceCtrl', function($scope, $interval, $htt
 			});
 		};
 	});
+}());

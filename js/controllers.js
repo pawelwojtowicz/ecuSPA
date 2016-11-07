@@ -3,7 +3,7 @@
 
 var maintenanceControllers = angular.module('maintenanceControllers', []);
 
-maintenanceControllers.controller('processListCtrl', function( $scope, $http)
+maintenanceControllers.controller('processListCtrl', ['$scope', '$http',function( $scope, $http)
 	{ 
 		$http.get('cgi-bin/controller?command_name=controller&api_name=get_process_list').success(function(responseData)
 		{
@@ -12,9 +12,9 @@ maintenanceControllers.controller('processListCtrl', function( $scope, $http)
 		{ 
 			$scope.processes = processList;
 		});
-	});
+	}]);
 
-maintenanceControllers.controller('meminfoCtrl', function( $scope, $http)
+maintenanceControllers.controller('meminfoCtrl', ['$scope', '$http',function( $scope, $http)
 	{ 
 		$http.get('cgi-bin/controller?command_name=getMemInfo').success(function(responseData)
 		{
@@ -30,17 +30,17 @@ maintenanceControllers.controller('meminfoCtrl', function( $scope, $http)
 		{ 
 			$scope.ctrl = [];
 		});
-	});
+	}]);
 	
-maintenanceControllers.controller('screenFlowCtrl', function($scope, $routeParams, $location)
+maintenanceControllers.controller('screenFlowCtrl', ['$scope', '$routeParams', '$location',function($scope, $routeParams, $location)
 	{
     $scope.changeScreen = function(viewName)
 		{
         $location.url('/'+viewName);
 		};
-	});
+	}]);
 
-maintenanceControllers.controller('statusUpdater', function($scope, $interval, $http)
+maintenanceControllers.controller('statusUpdater', ['$scope', '$interval', '$http',function($scope, $interval, $http)
 	{
 		$scope.number = 5;
 		$scope.statusText = 'no connection';
@@ -57,9 +57,9 @@ maintenanceControllers.controller('statusUpdater', function($scope, $interval, $
 										$scope.footerStyleClass = "nok";
 									});
 								}, 5000 );
-	});
+	}]);
 
-maintenanceControllers.controller('netControl', function($scope, $interval, $http)
+maintenanceControllers.controller('netControl', ['$scope', '$http',function($scope, $http)
 	{
 		$scope.networkConfigurationMode = 'auto';
 		$scope.message = '-';
@@ -74,10 +74,10 @@ maintenanceControllers.controller('netControl', function($scope, $interval, $htt
 		{
 			$scope.message = "Setting up the IPs to "+$scope.ipAddress; 
 		};
-	});
+	}]);
 	
 	
-maintenanceControllers.controller('deviceCtrl', function($scope, $interval, $http)
+maintenanceControllers.controller('deviceCtrl', ['$scope', '$http', function($scope, $http)
 	{
 		$scope.requestStatus='';
 		$scope.restartApplication = function()
@@ -107,5 +107,5 @@ maintenanceControllers.controller('deviceCtrl', function($scope, $interval, $htt
 				$scope.requestStatus = "Request failure";
 			});
 		};
-	});
+	}]);
 }());

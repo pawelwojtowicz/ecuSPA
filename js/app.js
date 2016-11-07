@@ -5,7 +5,7 @@
 
 var maintenancePage = angular.module('maintenanceApp', [
   'ngRoute',
-  'maintenanceControllers',
+  'maintenanceControllers'
 ]);
 
 maintenancePage.config(['$routeProvider',

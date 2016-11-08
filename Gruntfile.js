@@ -114,6 +114,28 @@ module.exports = function(grunt) {
           'output/js/angular-route.min.js': 'angular-route/angular-route.min.js'
         }
       }  
+    },
+    'string-replace': {
+      inline: {
+        files: {
+          'output/index.html' : 'index.html'
+        },
+        options: {
+          replacements: [{
+            pattern: '<!--XXX Live reload placeholder XXX-->',
+            replacement: '<script src="//localhost:35729/livereload.js"></script>'
+          }]
+        }
+      }
+    },
+    watch: {
+      options: {
+        livereload: true,
+      },
+      all: {
+        files: ['index.html','css/*', 'js/*', 'partials/*' ],
+        tasks: ['buildDebug'],
+      }
     }
   });
 
@@ -125,10 +147,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-angular-templates'); 
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-npmcopy');  
+  grunt.loadNpmTasks('grunt-npmcopy');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-string-replace');
   
   // Default task(s).
-  grunt.registerTask('debug', ['htmlhint','jshint','ngtemplates','concat','uglify:debug','cssmin','htmlmin','npmcopy:debug'] );
+  grunt.registerTask('buildDebug', ['htmlhint','jshint','ngtemplates','concat','uglify:debug','cssmin', 'string-replace','npmcopy:debug'] );
+  grunt.registerTask('debug', ['buildDebug','watch'] );
   grunt.registerTask('deploy', ['htmlhint','jshint','ngtemplates','concat','uglify:deploy','cssmin','htmlmin','npmcopy:deploy'] );
   grunt.registerTask('default', ['deploy']);
   grunt.registerTask('cleanup', ['clean']);

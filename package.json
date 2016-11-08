@@ -1,7 +1,7 @@
 {
   "name": "rpimaintenance",
   "version": "1.0.0",
-  "description": "",
+  "description": "The maintenance page of the ecu application, which runs on the custom Linux distribution. The implementation is a skeleton, which will be used to build complete solution later on. Now it only includes complete environment, configured and ready for further development",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

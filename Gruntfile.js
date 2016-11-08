@@ -91,11 +91,13 @@ module.exports = function(grunt) {
         }
       }
     },
+//-----delete the output and intermediate files--------------------------
     clean: {
       all: {
         src: ['output', 'intermediate']
       }
     },
+//-----copy the libraries and their map files ---------------------------
     npmcopy: {
       options: {
       // Task-specific options go here 
@@ -115,6 +117,7 @@ module.exports = function(grunt) {
         }
       }  
     },
+//-----alter the index.html, to enable livereload in debug mode ---------
     'string-replace': {
       inline: {
         files: {
@@ -128,6 +131,7 @@ module.exports = function(grunt) {
         }
       }
     },
+//-----startup the webserver, and proceed with further tasks -------------------------------
     run: {
     options: {
       wait: false
@@ -139,6 +143,7 @@ module.exports = function(grunt) {
       ]
     }
     },
+//-----run the live reload server - it will watch the files and trigger the reload ---------
     watch: {
       options: {
         livereload: true,

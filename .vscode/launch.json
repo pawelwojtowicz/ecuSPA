@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Build",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/grunt-cli/bin/grunt",
+            "args": [
+                "deploy"
+            ],
+            "cwd": "${workspaceRoot}"
+        },
+        {
+            "name": "Debug",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/grunt-cli/bin/grunt",
+            "args": [
+                "debug"
+            ],
+            "cwd": "${workspaceRoot}"
+        },
+        {
+            "name": "Clean",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/grunt-cli/bin/grunt",
+            "args": [
+                "cleanup"
+            ],
+            "cwd": "${workspaceRoot}"
+        }
+    ]
+}

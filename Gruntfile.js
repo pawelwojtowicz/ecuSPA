@@ -128,6 +128,17 @@ module.exports = function(grunt) {
         }
       }
     },
+    run: {
+    options: {
+      wait: false
+    },
+    serverWin: {
+      cmd: 'node',
+      args: [
+        'server.js'
+      ]
+    }
+    },
     watch: {
       options: {
         livereload: true,
@@ -150,10 +161,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-npmcopy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-string-replace');
+  grunt.loadNpmTasks('grunt-run');
   
   // Default task(s).
   grunt.registerTask('buildDebug', ['htmlhint','jshint','ngtemplates','concat','uglify:debug','cssmin', 'string-replace','npmcopy:debug'] );
-  grunt.registerTask('debug', ['buildDebug','watch'] );
+  grunt.registerTask('debug', ['buildDebug','run:serverWin','watch'] );
   grunt.registerTask('deploy', ['htmlhint','jshint','ngtemplates','concat','uglify:deploy','cssmin','htmlmin','npmcopy:deploy'] );
   grunt.registerTask('default', ['deploy']);
   grunt.registerTask('cleanup', ['clean']);

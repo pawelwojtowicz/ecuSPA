@@ -3,48 +3,63 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-	htmlhint: {
-	  options: {
-		"tag-pair": true
-	  },
-	  html1: {
-		src: ['index.html','partials/*.html']
-	  }
-	},
-	jshint: {
-		all: ['js/*.js']
-	},
-	concat: {
-		options: {
-			stripBanners: true,
-			banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +  '<%= grunt.template.today("yyyy-mm-dd") %> */'
-		},
-		dist: {
-			src: ['js/controllers.js','js/app.js','intermediate/template.js'],
-			dest: 'intermediate/concatenatedApp.js',
-		}
-	},
-	uglify: {
-		options: {
-			banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-		},
-		build: {
-			src: 'intermediate/concatenatedApp.js',
-			dest: 'output/js/<%= pkg.name %>.min.js'
-		}
-	},
-	htmlmin: {                                     // Task
-		app: {                                      // Target
-			options: {                                 // Target options
-				removeComments: true,
-				collapseWhitespace: true
-			},
-			files: {                                   // Dictionary of files
-				'output/index.html': 'index.html',     // 'destination': 'source'
-			}
-		}
-	},
-	ngtemplates:  {
+//-----html hint -----------------------------------------------
+    htmlhint: {
+      options: {
+        "tag-pair": true
+      },
+      all: {
+        src: ['index.html','partials/*.html']
+      }
+    },
+//-----javascript hint --------------------------------------------------
+    jshint: {
+      all: ['js/*.js']
+    },
+//-----file concatenation -----------------------------------------------    
+    concat: {
+      options: {
+        stripBanners: true,
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +  '<%= grunt.template.today("yyyy-mm-dd") %> */'
+      },
+      all: {
+        src: ['js/controllers.js','js/app.js','intermediate/template.js'],
+        dest: 'intermediate/concatenatedApp.js',
+      }
+    },
+//-----uglify Javascript ------------------------------------------------
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+      },
+      debug: {
+        options: {
+          sourceMap: true
+        },
+        files: {
+          'output/js/<%= pkg.name %>.min.js': 'intermediate/concatenatedApp.js'
+        }
+      },
+      deploy: {
+        files: {
+            'output/js/<%= pkg.name %>.min.js': 'intermediate/concatenatedApp.js'
+        }
+      }
+    },
+//-----uglify HTML ------------------------------------------------------
+    htmlmin: {
+      all: {                                      // Target
+        options: {                                 // Target options
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        files: {                                   // Dictionary of files
+          'output/index.html': 'index.html',     // 'destination': 'source'
+        }
+      }
+    },
+//-----generating template cache ----------------------------------------
+    ngtemplates: {
 		app:	{
 			src:      'partials/**.html',
 			dest:     'intermediate/template.js',
@@ -64,33 +79,42 @@ module.exports = function(grunt) {
 			}
 		}
 	},
-	cssmin: {
-		options: {
-			shorthandCompacting: false,
-			roundingPrecision: -1
-		},
-		target: {
-			files: {
-			'output/css/stylesheet.css': ['css/stylesheet.css']
-			}
-		}
-	},
-	clean: {
-		app: {
-			src: ['output', 'dist']
-		}
-	},
-  npmcopy: {
-    options: {
-    // Task-specific options go here 
+//-----uglify the CSS
+    cssmin: {
+      options: {
+        shorthandCompacting: false,
+        roundingPrecision: -1
+      },
+      all: {
+        files: {
+          'output/css/stylesheet.css': ['css/stylesheet.css']
+        }
+      }
     },
-    target: {
-      files: {
+    clean: {
+      all: {
+        src: ['output', 'intermediate']
+      }
+    },
+    npmcopy: {
+      options: {
+      // Task-specific options go here 
+      },
+      debug: {
+        files: {
         'output/js/angular.min.js':'angular/angular.min.js',
-        'output/js/angular-route.min.js': 'angular-route/angular-route.min.js'
-      }    
+        'output/js/angular.min.js.map':'angular/angular.min.js.map',
+        'output/js/angular-route.min.js': 'angular-route/angular-route.min.js',
+        'output/js/angular-route.min.js.map': 'angular-route/angular-route.min.js.map'
+        }
+      },
+      deploy: {
+        files: {
+          'output/js/angular.min.js':'angular/angular.min.js',
+          'output/js/angular-route.min.js': 'angular-route/angular-route.min.js'
+        }
+      }  
     }
-  }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');  
@@ -104,6 +128,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-npmcopy');  
   
   // Default task(s).
-  grunt.registerTask('default', ['htmlhint','jshint','ngtemplates','concat','uglify','cssmin','htmlmin','npmcopy']);
+  grunt.registerTask('debug', ['htmlhint','jshint','ngtemplates','concat','uglify:debug','cssmin','htmlmin','npmcopy:debug'] );
+  grunt.registerTask('deploy', ['htmlhint','jshint','ngtemplates','concat','uglify:deploy','cssmin','htmlmin','npmcopy:deploy'] );
+  grunt.registerTask('default', ['deploy']);
   grunt.registerTask('cleanup', ['clean']);
 };

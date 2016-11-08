@@ -79,7 +79,18 @@ module.exports = function(grunt) {
 		app: {
 			src: ['output', 'dist']
 		}
-	}
+	},
+  npmcopy: {
+    options: {
+    // Task-specific options go here 
+    },
+    target: {
+      files: {
+        'output/js/angular.min.js':'angular/angular.min.js',
+        'output/js/angular-route.min.js': 'angular-route/angular-route.min.js'
+      }    
+    }
+  }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');  
@@ -89,9 +100,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-angular-templates'); 
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-clean');  
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-npmcopy');  
   
   // Default task(s).
-  grunt.registerTask('default', ['htmlhint','jshint','ngtemplates','concat','uglify','cssmin','htmlmin']);
+  grunt.registerTask('default', ['htmlhint','jshint','ngtemplates','concat','uglify','cssmin','htmlmin','npmcopy']);
   grunt.registerTask('cleanup', ['clean']);
 };
